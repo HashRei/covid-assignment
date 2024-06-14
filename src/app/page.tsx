@@ -1,4 +1,6 @@
+import React from "react";
 import Card from "./components/Card";
+import Panel from "./components/Panel";
 import { ChartType } from "./types/ChartTypes";
 
 const cardsData = [
@@ -7,12 +9,22 @@ const cardsData = [
   // Add more card data as needed
 ];
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <main className="flex flex-wrap gap-4 p-24">
-      {cardsData.map((card) => (
-        <Card key={card.id} chartType={card.chartType} />
-      ))}
+    <main className="flex flex-col gap-4 p-4">
+      <Panel />
+      <div className="flex flex-wrap gap-4 justify-between">
+        {cardsData.map((card) => (
+          <div
+            key={card.id}
+            className="flex-1 min-w-[calc(50%-1rem)] max-w-[calc(50%-1rem)]"
+          >
+            <Card chartType={card.chartType} />
+          </div>
+        ))}
+      </div>
     </main>
   );
-}
+};
+
+export default Home;

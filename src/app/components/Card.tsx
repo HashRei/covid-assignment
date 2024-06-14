@@ -12,7 +12,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ chartType }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-md">
+    <div className="bg-white shadow-md rounded-lg p-4 w-full">
       <div className="mb-4">
         <h2 className="text-xl font-bold">Chart Title</h2>
       </div>
