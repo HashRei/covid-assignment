@@ -1,63 +1,23 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { Chart } from "@antv/g2";
+import React from "react";
 import Image from "next/image";
 import { MessageTwoTone } from "@ant-design/icons";
+import Chart from "./Chart";
+import { ChartType } from "../types/ChartTypes";
 
-const Card: React.FC = () => {
-  const chartRef = useRef<HTMLDivElement | null>(null);
-  const chartInstance = useRef<Chart | null>(null);
+interface CardProps {
+  chartType: ChartType;
+}
 
-  useEffect(() => {
-    if (chartRef.current) {
-      // Cleanup any existing chart instance
-      if (chartInstance.current) {
-        chartInstance.current.destroy();
-      }
-
-      const chart = new Chart({
-        container: chartRef.current,
-        autoFit: true,
-        height: 200,
-      });
-
-      chart.data([
-        { genre: "Sports", sold: 275 },
-        { genre: "Strategy", sold: 115 },
-        { genre: "Action", sold: 120 },
-        { genre: "Shooter", sold: 350 },
-        { genre: "Other", sold: 150 },
-      ]);
-
-      chart
-        .interval()
-        .encode("x", "genre")
-        .encode("y", "sold")
-        .encode("color", "genre");
-
-      chart.render();
-
-      // Save the chart instance for cleanup
-      chartInstance.current = chart;
-    }
-
-    // Cleanup on component unmount
-    return () => {
-      if (chartInstance.current) {
-        chartInstance.current.destroy();
-        chartInstance.current = null;
-      }
-    };
-  }, []);
-
+const Card: React.FC<CardProps> = ({ chartType }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-md">
       <div className="mb-4">
         <h2 className="text-xl font-bold">Chart Title</h2>
       </div>
       <div className="mb-4">
-        <div ref={chartRef} className="w-full h-48 bg-gray-100"></div>
+        <Chart type={chartType} />
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center">
