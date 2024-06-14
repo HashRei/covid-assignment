@@ -15,10 +15,7 @@ const Home: React.FC = () => {
       <Panel />
       <div className="flex flex-wrap gap-4 justify-between">
         {cardsData.map((card) => (
-          <div
-            key={card.id}
-            className="flex-1 min-w-[calc(50%-1rem)] max-w-[calc(50%-1rem)]"
-          >
+          <div key={card.id} className="flex-1">
             <Card chartType={card.chartType} />
           </div>
         ))}
